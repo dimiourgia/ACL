@@ -80,15 +80,9 @@ if (process.env.NODE_ENV === "production") {
     })
 }
 
-
-
-
-
-
-
 app.use(express.static)
 
-if(porcess.env.PORT)
+if(process.env.PORT)
 app.listen(process.env.PORT, ()=>{
     console.log('listening on port ', process.env.PORT)
 })
