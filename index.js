@@ -31,7 +31,7 @@ async function createUser(profile){
 }
 
 
-app.post('/register',  async (req,res)=>{
+app.post('/api/register',  async (req,res)=>{
     console.log('creating user')
     const userData = req.body
     console.log(userData)
@@ -45,7 +45,7 @@ app.post('/register',  async (req,res)=>{
     createUser(userData).then(res.json({message:'user registered sucessfully', type:'success'}))
 })
 
-app.post('/login', async (req, res)=>{
+app.post('/api/login', async (req, res)=>{
     console.log('trying to login')
     const {email, password} = req.body
 
@@ -67,6 +67,25 @@ app.post('/login', async (req, res)=>{
 })
 
 
+// serve frontend in production environment
+if (process.env.NODE_ENV === "production") {
+    const path = require("path");
+    app.use(express.static(path.resolve(__dirname, 'frontend', 'build')));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'),function (err) {
+            if(err) {
+                res.status(500).send(err)
+            }
+        });
+    })
+}
+
+
+
+
+
+
+app.use(express.static)
 
 if(porcess.env.PORT)
 app.listen(process.env.PORT, ()=>{
