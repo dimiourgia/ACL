@@ -70,9 +70,9 @@ app.post('/api/login', async (req, res)=>{
 // serve frontend in production environment
 if (process.env.NODE_ENV === "production") {
     const path = require("path");
-    app.use(express.static(path.resolve(__dirname, 'frontend', 'build')));
+    app.use(express.static(path.resolve(__dirname, 'frontend', 'builds')));
     app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'),function (err) {
+        res.sendFile(path.resolve(__dirname, 'frontend', 'builds', 'index.html'),function (err) {
             if(err) {
                 res.status(500).send(err)
             }
