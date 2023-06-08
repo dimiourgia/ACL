@@ -38,11 +38,11 @@ app.post('/api/register',  async (req,res)=>{
     const user = await userModel.findOne({email: userData.email})
 
     if(user){
-        res.json({message:'User already registered', type:'error'})
+        res.json({message:'Email already registered', type:'error'})
         return
     }
 
-    createUser(userData).then(res.json({message:'user registered sucessfully', type:'success'}))
+    createUser(userData).then(res.json({message:'Registration sucessfully', type:'success'}))
 })
 
 app.post('/api/login', async (req, res)=>{
@@ -63,7 +63,7 @@ app.post('/api/login', async (req, res)=>{
     }
 
     const token = jwt.sign({id: user._id}, process.env.SECRET)
-    res.json({token, userId: user._id})
+    res.json({token:token, userId: user._id, userName:user.firstName, message:'login successful', type:'success'})
 })
 
 
