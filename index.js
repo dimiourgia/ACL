@@ -33,7 +33,7 @@ async function createUser(profile){
 
 app.post('/api/register',  async (req,res)=>{
     console.log('creating user')
-    const userData = req.body
+    let userData = req.body
     console.log(userData)
     userData.email = userData.email.toLowerCase()
     const user = await userModel.findOne({email: userData.email})
@@ -48,7 +48,7 @@ app.post('/api/register',  async (req,res)=>{
 
 app.post('/api/login', async (req, res)=>{
     console.log('trying to login')
-    const {email, password} = req.body
+    let {email, password} = req.body
     email = email.toLowerCase()
 
     const user = await userModel.findOne({email})
