@@ -39,6 +39,7 @@ app.post('/api/register',  async (req,res)=>{
     const user = await userModel.findOne({email: userData.email})
 
     console.log(userData)
+    console.log("user: ", user)
 
     if(user)
         res.json({message:'Email already registered', type:'error'})
