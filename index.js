@@ -38,12 +38,13 @@ app.post('/api/register',  async (req,res)=>{
     userData.email = userData.email.toLowerCase()
     const user = await userModel.findOne({email: userData.email})
 
-    if(user){
-        res.json({message:'Email already registered', type:'error'})
-        return
-    }
+    console.log(userData)
 
-    createUser(userData).then(res.json({message:'Registration sucessfully', type:'success'}))
+    if(user)
+        res.json({message:'Email already registered', type:'error'})
+
+    else
+        createUser(userData).then(res.json({message:'Registration sucessful', type:'success'}))
 })
 
 app.post('/api/login', async (req, res)=>{
